@@ -10,7 +10,7 @@ script:
 - DISTRIBUTION_NAME=ballerina-${BALLERINA_VERSION}
 - echo -e "\033[36m${DISTRIBUTION_NAME}\033[m"
 
-- DOWNLOAD_CHANNEL=${CHANNEL:-nightly}
+- DOWNLOAD_CHANNEL=${CHANNEL:-downloads}
 - echo -e "\033[36m${DOWNLOAD_CHANNEL}\033[m"
 
 - DOWNLOAD_LOCATION=${URL:-https://product-dist.ballerina.io}
