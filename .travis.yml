@@ -2,6 +2,7 @@ script:
 - mvn clean install -q
 - cd SampleServicesCompositeApplicationStaging
 - mvn clean deploy -Dmaven.deploy.skip=true -Dmaven.car.deploy.skip=false
+- cd ../
 
 - BALLERINA_VERSION=${VERSION:-0.990.1-SNAPSHOT}
 - echo -e "\033[36m${BALLERINA_VERSION}\033[m"
