@@ -1,5 +1,6 @@
 script:
  - mvn clean install
+ - cd SampleServicesCompositeApplicationStaging
  - mvn clean deploy -Dmaven.deploy.skip=true -Dmaven.car.deploy.skip=false
 env:
   global:
