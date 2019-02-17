@@ -47,6 +47,14 @@ script:
 
   - export ENV=Production
 
+
+after_success:
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
+  - export GIT_TAG=build-$TRAVIS_BRANCH-$(date -u "+%Y-%m-%d-%H-%M-%S")-$TRAVIS_BUILD_NUMBER
+  - git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
+  - git push origin $GIT_TAG
+
 env:
   global:
   - secure: BEo6kfbc7ZcVeKidDKNkli4LERgayKiaJ5xeBCFfoXiIIZWOHaA2OzNkC425buxv9kCGifnkJlfsAe3fqlscajuHyLYFf7noHsoQ163HOmG0VE4ZAu0Y1flMn/0kP5oU4dbQjHUHxcpTwFR6eIx5XK7yV7swmutLYNqZ9eg1q8DZCl5bRwktkMr0NAMMXEodFI0Hot0XdA8huDI+c+PfJZT3YU7QhPXLaqWlADV/RAo3sn/1kjrtQI1MKNtpyr/wwFMa9nckQoxUBBEPBVxOe8m+38+5oZPUm9GcaaIsydeRlQILHrNJiKA1KqQcRaXynlPU2A9HoxoLS80gdkMzYd+iCcMTyfK43JikuWGvaoJzTBuBYXE6jr61Mya46boSVP+uGatlq6iIq75V3JXnVeY+dLTDdnxT2JLPd1AyUAbOxBVi1w4lX4DxZ3ayXHJ72nMwAAGcxAjQhmXJeJPt/EGajxsjbe2EAJ0XT2Mh5u/XPIAX/da6Ynt9Xej67OpJAZINm08JUkCVtEHgFNkUKU0vCAfAdLWnzp28BQhERObhdBS4nw3VxbR3tioVueQRwOhwD3DNIKadJVN083c5aQmKcmkwOHji4xmIFwXPjgj3+SONg/iHwBcot8nz16FD5N9566U7FXCMvj+xZy1Qdtkq0Gr+EMV/0zm+rebvpLI=
