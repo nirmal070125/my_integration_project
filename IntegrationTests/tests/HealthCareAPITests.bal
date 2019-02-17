@@ -3,7 +3,8 @@ import ballerina/test;
 import ballerina/config;
 import ballerina/io;
 
-string eiEP = config:getAsString("STAGING_EI_SERVICE", default = "http://localhost:8280");
+string env = config:getAsString("ENV", default = "Dev");
+string eiEP = config:getAsString(env +"_EI_SERVICE", default = "http://localhost:8280");
 http:Client healthAPIEP  = new(eiEP + "/healthcare");
 int currentApptNumber = -1;
 
