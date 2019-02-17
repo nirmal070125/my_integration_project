@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <endpoint name="SettlePaymentEP" xmlns="http://ws.apache.org/ns/synapse">
-    <http method="post" uri-template="http://localhost:9090/healthcare/payments"/>
+    <http method="post" uri-template="http://msf4jnirmal.westus.azurecontainer.io:9090/healthcare/payments"/>
 </endpoint>
