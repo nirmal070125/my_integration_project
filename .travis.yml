@@ -1,7 +1,34 @@
 script:
- - mvn clean install
- - cd SampleServicesCompositeApplicationStaging
- - mvn clean deploy -Dmaven.deploy.skip=true -Dmaven.car.deploy.skip=false
+- mvn clean install -q
+- cd SampleServicesCompositeApplicationStaging
+- mvn clean deploy -Dmaven.deploy.skip=true -Dmaven.car.deploy.skip=false
+
+- BALLERINA_VERSION=${VERSION:-0.990.1-SNAPSHOT}
+- echo -e "\033[36m${BALLERINA_VERSION}\033[m"
+
+- DISTRIBUTION_NAME=ballerina-${BALLERINA_VERSION}
+- echo -e "\033[36m${DISTRIBUTION_NAME}\033[m"
+
+- DOWNLOAD_CHANNEL=${CHANNEL:-nightly}
+- echo -e "\033[36m${DOWNLOAD_CHANNEL}\033[m"
+
+- DOWNLOAD_LOCATION=${URL:-https://product-dist.ballerina.io}
+- echo -e "\033[36m${DOWNLOAD_LOCATION}\033[m"
+
+- echo -e "\033[36m${DOWNLOAD_LOCATION}/${DOWNLOAD_CHANNEL}/${BALLERINA_VERSION}${RC:-}/${DISTRIBUTION_NAME}${RC:-}.zip\033[m"
+- wget ${DOWNLOAD_LOCATION}/${DOWNLOAD_CHANNEL}/${BALLERINA_VERSION}${RC:-}/${DISTRIBUTION_NAME}${RC:-}.zip
+
+- unzip -q ${DISTRIBUTION_NAME}${RC:-}.zip
+
+- export PATH=${PATH}:$(pwd)/${DISTRIBUTION_NAME}/bin
+
+- ballerina version
+
+- cd IntegrationTests
+
+- ballerina test 
+
 env:
   global:
-    secure: BEo6kfbc7ZcVeKidDKNkli4LERgayKiaJ5xeBCFfoXiIIZWOHaA2OzNkC425buxv9kCGifnkJlfsAe3fqlscajuHyLYFf7noHsoQ163HOmG0VE4ZAu0Y1flMn/0kP5oU4dbQjHUHxcpTwFR6eIx5XK7yV7swmutLYNqZ9eg1q8DZCl5bRwktkMr0NAMMXEodFI0Hot0XdA8huDI+c+PfJZT3YU7QhPXLaqWlADV/RAo3sn/1kjrtQI1MKNtpyr/wwFMa9nckQoxUBBEPBVxOe8m+38+5oZPUm9GcaaIsydeRlQILHrNJiKA1KqQcRaXynlPU2A9HoxoLS80gdkMzYd+iCcMTyfK43JikuWGvaoJzTBuBYXE6jr61Mya46boSVP+uGatlq6iIq75V3JXnVeY+dLTDdnxT2JLPd1AyUAbOxBVi1w4lX4DxZ3ayXHJ72nMwAAGcxAjQhmXJeJPt/EGajxsjbe2EAJ0XT2Mh5u/XPIAX/da6Ynt9Xej67OpJAZINm08JUkCVtEHgFNkUKU0vCAfAdLWnzp28BQhERObhdBS4nw3VxbR3tioVueQRwOhwD3DNIKadJVN083c5aQmKcmkwOHji4xmIFwXPjgj3+SONg/iHwBcot8nz16FD5N9566U7FXCMvj+xZy1Qdtkq0Gr+EMV/0zm+rebvpLI=
+  - secure: BEo6kfbc7ZcVeKidDKNkli4LERgayKiaJ5xeBCFfoXiIIZWOHaA2OzNkC425buxv9kCGifnkJlfsAe3fqlscajuHyLYFf7noHsoQ163HOmG0VE4ZAu0Y1flMn/0kP5oU4dbQjHUHxcpTwFR6eIx5XK7yV7swmutLYNqZ9eg1q8DZCl5bRwktkMr0NAMMXEodFI0Hot0XdA8huDI+c+PfJZT3YU7QhPXLaqWlADV/RAo3sn/1kjrtQI1MKNtpyr/wwFMa9nckQoxUBBEPBVxOe8m+38+5oZPUm9GcaaIsydeRlQILHrNJiKA1KqQcRaXynlPU2A9HoxoLS80gdkMzYd+iCcMTyfK43JikuWGvaoJzTBuBYXE6jr61Mya46boSVP+uGatlq6iIq75V3JXnVeY+dLTDdnxT2JLPd1AyUAbOxBVi1w4lX4DxZ3ayXHJ72nMwAAGcxAjQhmXJeJPt/EGajxsjbe2EAJ0XT2Mh5u/XPIAX/da6Ynt9Xej67OpJAZINm08JUkCVtEHgFNkUKU0vCAfAdLWnzp28BQhERObhdBS4nw3VxbR3tioVueQRwOhwD3DNIKadJVN083c5aQmKcmkwOHji4xmIFwXPjgj3+SONg/iHwBcot8nz16FD5N9566U7FXCMvj+xZy1Qdtkq0Gr+EMV/0zm+rebvpLI=
+  - secure: K2on8iDloEhTQOxRQLwzp2X/8MDWAIaCLFI42nREQ3JSxxnRWi8DghcB3qfi+Kzqr6WKIcnC1MkgGTfutYuEKxJ8ocwGlx6f5TA/WFsk/scbD00QonBbJrf8YFpm6v1mgVj3/NuaYvlzvsIPN+i5x/tKPnJJCCDqUI7V8VEpaCYcIHXOHu4QKQJa/vYrb+NFIZ6FZsFUzwvkj37cuBVTMFNuYg7OASjaAoWuCAXVnZo9Mjy54/Wu5VjW6s+aMCu8AiozQyEQ1VxgKHVsU2RJDXNJcVMi2RXSVOy9JpDUxFUb6RggZJycLLvrsOFOZHApEsEgm7isXCfrhRlYwIbMxHJvD8G3i/+sk0Ronwh+g6RaiwhjCFS3bzMYuX5cgL76CpNrUqHBHJEb7Fj0Lfbr1fjiE813uQ3Yt6EpX74DBt6rWHS6J6aAnD8dGSeIIxubD9r9qMbufGMRwYHV9lj/ENalackldsDeHlbxnDtncntdVz3sXWmG/dnjevPw5jAFvU3RXdkLTjOSgFNI8JtoJVRHVF4SrbIzAkgAHaf3eus/GKoLoMUAn8Hr8/dFcXjiob+9O1V9Np6+vE3qK9u8tcXo0Uj62U/jur4gEJhUWL1SmFo62hBbIb736j7QFTBrhfyWZme1o7HKsziOOn5snl+Ds7lvO8wftlc+f5gQtN4=
