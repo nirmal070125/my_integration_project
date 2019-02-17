@@ -1,1 +1,1 @@
-# my_integration_project
+#Sample WSO2 Enterprise Integrator Based Integration Project
