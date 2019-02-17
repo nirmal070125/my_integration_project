@@ -30,7 +30,7 @@ script:
   # Staging environment ################################
   ######################################################
 
-  - ENV=Staging
+  - export ENV=Staging
   # build the artefacts and deploy in staging server
   - mvn clean install -q
   - cd SampleServicesCompositeApplication$ENV
@@ -44,7 +44,7 @@ script:
   # Production environment ################################
   ######################################################
 
-  - ENV=Production
+  - export ENV=Production
 
 env:
   global:
