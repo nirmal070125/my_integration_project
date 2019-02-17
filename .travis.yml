@@ -36,6 +36,7 @@ script:
   - cd SampleServicesCompositeApplication$ENV
   - mvn clean deploy -Dmaven.deploy.skip=true -Dmaven.car.deploy.skip=false
   - cd ../
+  - sleep 10
   # run the integration tests
   - cd IntegrationTests
   - ballerina test 
