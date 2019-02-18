@@ -199,6 +199,9 @@ Following is a screenshot of the final set of lines of the build output;
 # References
 
 [1] https://ballerina.io/learn/
+
 [2] https://ballerina.io/learn/how-to-test-ballerina-code/
+
 [3] https://docs.travis-ci.com/user/encryption-keys/
+
 [4] https://ballerina.io/learn/by-example/taint-checking.html
