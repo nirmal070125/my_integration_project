@@ -196,6 +196,15 @@ Following is a screenshot of the final set of lines of the build output;
 
 ![alt tag](build-output-diagram.png)
 
+# Future Improvements
+
+I am thinking of following future improvements to this PoC;
+
+- Testing a SOAP service
+- Performing a load test with concurrent users
+- Replacing Travis CI with Ballerina
+
+
 # References
 
 [1] https://ballerina.io/learn/
